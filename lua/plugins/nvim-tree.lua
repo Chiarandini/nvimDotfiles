@@ -1,0 +1,26 @@
+-- NOTE: trying out folke snacks version
+return {}
+-- return {
+-- 	"nvim-tree/nvim-tree.lua",
+-- 	keys = {
+-- 		-- {'<c-t>','<cmd>NvimTreeToggle<cr>', desc = 'open nvim-tree'},
+-- 		{'<c-w><c-t>','<cmd>NvimTreeToggle<cr>', desc = 'open nvim-tree'},
+-- 		{'<c-s>',function() require('nvim-tree.api').tree.open({find_file=true}) end , desc = 'nvim-tree: open current'},
+-- 	},
+-- 	cmd = {'NvimTreeToggle', 'NvimTreeFocus', 'NvimTreeFindFile', 'NvimTreeCollapse'},
+--
+-- 	dependencies = {
+-- 		"nvim-tree/nvim-web-devicons",
+-- 		-- {
+-- 		-- 	"3rd/image.nvim",
+-- 		-- 	build=false,
+-- 		-- 	dependencies = { "vhyrro/luarocks.nvim" },
+-- 		-- 	config = function()
+-- 		-- 		require("configs.image")
+-- 		-- 	end,
+-- 		-- },
+-- 	},
+-- 	config = function()
+-- 		require("configs.nvim-tree")
+-- 	end,
+-- }

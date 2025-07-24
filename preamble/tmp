@@ -1,0 +1,578 @@
+\documentclass{book}
+%\documentclass{book}
+%If you're going to print this, perhaps get ride of oneside so that \parts{} will have their own page!
+\title{
+	\begin{huge}
+		\bf{Everything You Need To Know About Elliptic Curves}
+	\end{huge}
+	}
+\author{Nathanael Chwojko-Srawley}
+%\date{} % If you want to specify a date
+\usepackage{inputenc}         % Used to compile any UTF-8 Character (and supports Unicode)
+\usepackage{extarrows}
+\usepackage{stackengine}
+\usepackage{scalerel}
+\usepackage{stackrel}         % for left-right arrows, staking symbol above and bellow
+\usepackage{mathrsfs}
+\usepackage{euscript}
+\usepackage{makeidx}
+\usepackage[font=itshape]{quoting}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{graphicx}         % Let's you use images in LaTeX; ex the \includegraphics command.
+\usepackage{wasysym}          % emoji's!
+\usepackage{dsfont}
+\usepackage{float}            % package with ``H'' for figures and tables, ex. Images, tables, etc
+\usepackage{setspace}         % More flexibility on spacing in document.
+\usepackage{commutative-diagrams}
+\usepackage{hhline}
+\usepackage{tikz-cd}          % for commutative diagrams https://tex.stackexchange.com/questions/419221/how-to-do-the-pushout-with-universal-property
+\usepackage{longtable}        % create tables that extend past one page
+\usepackage{microtype}        % makes nice text. Fixes some under-/over- filled box problems.
+\usepackage{xcolor}           % Colour text.
+\usepackage{wrapfig}          % To wrap text around figure
+\usepackage{listings}         % Create nice colour code blocks (customized in preamble)
+\usepackage{amsthm}           % Used to create theorem enviroments.
+\usepackage{array}            % \begin{table}{>{\em}c c} -> 1st column italic (bfseries for bold)
+\usepackage{blindtext}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[answerdelayed]{exercise}
+\usepackage{etoolbox}          % for Dynkin diagrams
+\usepackage{dynkin-diagrams}   % for Dynkin diagrams
+% \usepackage{pgfplots}
+
+\usepackage{amsmath, amssymb} % Used to write better mathematical expressions (ex. \mathbb{R})
+\usepackage[most]{tcolorbox} 	      % Makes nice boxes for thms, cor, prop, or anything else.
+\usepackage{thmtools}         % Customize theorem environment (in preamble).
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\usetikzlibrary{%
+  matrix,%
+  calc,%
+  arrows%
+}
+
+% ╔═══════╗
+% ║ title ║
+% ╚═══════╝
+
+%% check if using xelatex rather than pdflatex
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\ifpdf
+\usepackage{pdfcolmk}
+\fi
+\ifxetex
+\usepackage{fontspec}
+\fi
+\usepackage{pifont}
+
+\providecommand{\HUGE}{\Huge}% if not using memoir
+\newlength{\drop}% for my convenience
+%% select a (FontSite) font by its font family ID
+\newcommand*{\FSfont}[1]{\fontencoding{T1}\fontfamily{#1}\selectfont}
+%% if you don’t have the FontSite fonts either \renewcommand*{\FSfont}[1]{}
+%% or use your own choice of family.
+%% select a (TeX Font) font by its font family ID
+\newcommand*{\TXfont}[1]{\fontencoding{T1}\fontfamily{#1}\selectfont}
+%% Generic publisher’s logo
+\newcommand*{\plogo}{\fbox{$\mathcal{PL}$}}
+
+%% Some shades
+\definecolor{Dark}{gray}{0.2}
+\definecolor{MedDark}{gray}{0.4}
+\definecolor{Medium}{gray}{0.6}
+\definecolor{Light}{gray}{0.8}
+%%%% Additional font series macros
+\makeatletter
+%%%% light series
+%% e.g., kernel doc, section s: line 12 or thereabouts
+\DeclareRobustCommand\ltseries
+{\not@math@alphabet\ltseries\relax
+\fontseries\ltdefault\selectfont}
+%% e.g., kernel doc, section t: line 32 or thereabouts
+\newcommand{\ltdefault}{l}
+%% e.g., kernel doc, section v: line 19 or thereabouts
+\DeclareTextFontCommand{\textlt}{\ltseries}
+% heavy(bold) series
+\DeclareRobustCommand\hbseries
+{\not@math@alphabet\hbseries\relax
+\fontseries\hbdefault\selectfont}
+\newcommand{\hbdefault}{hb}
+\DeclareTextFontCommand{\texthb}{\hbseries}
+\makeatother
+
+
+\newcommand{\titleUL}{\begingroup% University of Liege
+\drop=0.1\textheight
+\vspace*{\drop}
+\begin{center}
+% {\LARGE\textsc{University of Toronto}}\\[\drop]
+% University logo
+% {\LARGE \plogo}\\[\drop]
+{\LARGE {\quad}}\\[\drop]
+
+\rule{\textwidth}{1pt}\par
+\vspace{0.5\baselineskip}
+{\huge\bfseries Elliptic Curves\\[0.2\baselineskip]
+\large --- \emph{EYNTKA} Series ---}\\[0.5\baselineskip]
+\rule{\textwidth}{1pt}\par
+\vfill
+{\Large\textsc{Nathanael Chwojko-Srawley}}
+\vfill
+\vfill
+{\large \today}
+\end{center}
+\endgroup}
+
+%header information
+\pagestyle{fancy}
+\setlength\headheight{20pt}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\fancyfoot[C,CO]{\textcolor{gray}{Nathanael Chwojko-Srawley}}
+\fancyfoot[R,RO]{\thepage}{}
+
+\titleformat
+{\chapter} % command
+[display] % shape
+{\bfseries\Huge\itshape} % format
+{\thechapter} % label
+{0.5ex} % sep
+{
+    \rule{\textwidth}{1pt}
+    \vspace{2ex}
+    \centering
+} % before-code
+[
+\vspace{-0.5ex}%
+\rule{\textwidth}{1pt}
+] % after-code
+
+% Create a new page style for the first page
+\fancypagestyle{firstpage}{
+  \fancyhf{} % Clear header and footer
+  \renewcommand{\headrulewidth}{0pt} % This removes the header line
+  \fancyfoot[C]{\thepage}
+}
+
+% Apply the first page style conditionally
+\AtBeginDocument{\thispagestyle{firstpage}}
+
+\makeindex
+
+% For citing
+\usepackage{csquotes}
+% \usepackage{comment}
+% \usepackage[backend=biber,citestyle=alphabetic,bibstyle=authortitle]{biblatex}
+\usepackage[backend=biber]{biblatex}
+
+\addbibresource{bibliography.bib}
+
+
+\stackMath %to be able to stack text in math mode
+% % For devnagari font for that one example
+% \newcommand\dn{\catcode`\~=12 \fontspec[Script=Devanagari,Mapping=velthuis-sanskrit]{Nakula}}
+
+
+
+
+%\ExerciseLevelInToc
+\counterwithin{Exercise}{section}
+\counterwithin{Answer}{section}
+%\renewcommand{\ExerciseHeader}{\noindent\def\stackalignment{c}% code from https://tex.stackexchange.com/a/195118/101651
+    %\stackunder{{\textbf{\large\ExerciseName}}}{\textcolor{black}{\rule{40pt}{4pt}}}\medskip}
+
+
+
+%theorem code
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{lightyellow}{rgb}{1,1,0.6}
+\definecolor{reddish}{HTML}{A01A3A}
+%Theorems, propositions, Corollaries, Definitions
+
+% breakable,
+
+%Wanna implement this, but not working: https://tex.stackexchange.com/questions/547979/problem-numbering-environment
+\newtcbtheorem[number within=section]{thm}{Theorem}%
+{
+colback=green!5,
+colframe=green!35!black,
+fonttitle=\bfseries,
+label type=theorem
+}{th}
+
+\newtcbtheorem[number within=section, use counter from=thm]{lem}{Lemma}%
+{
+colback=blue!5,
+colframe=black!35!black,
+fonttitle=\bfseries,
+label type=lemma
+}{lm}
+\newtcbtheorem[number within=section, use counter from=thm]{prop}{Proposition}%
+{
+colback=white!5,
+colframe=white!35!black,
+fonttitle=\bfseries,
+label type=proposition
+}{pr}
+\newtcbtheorem[number within=section, use counter from=thm]{cor}{Corollary}%
+{colback=blue!5,
+colframe=blue!35!black,
+fonttitle=\bfseries,
+label type=corollary
+}{co}
+\newtcbtheorem[number within=section, use counter from=thm]{axiom}{Axiom}%
+{colback=black!5,
+colframe=yellow!35!black,
+fonttitle=\bfseries,
+label type=axiom
+}{ax}
+\newtcbtheorem[number within=section, use counter from=thm]{defn}{Definition}%
+{colback=red!5,
+colframe=red!35!black,
+fonttitle=\bfseries,
+label type=definition
+}{df}
+
+
+% for <s-cr> to create \item[$\LRw$] instead of \item
+\newenvironment{equivEnumerate}
+ {\begin{enumerate}
+	}{
+\end{enumerate}}
+
+\newtcbtheorem[number within=section]{titledBox}{}{%
+  enhanced,
+  sharp corners,
+  colback=white,
+  colframe=black,
+  borderline={0.2pt}{0pt}{black},
+  left=2mm,
+  right=2mm,
+  top=2mm,
+  bottom=2mm,
+  title style={opacity=1},
+  attach title to upper,
+  before upper={\textbf{\tcbtitletext}\quad},
+  coltitle=black,
+  fonttitle=\bfseries,
+  separator sign={\quad}
+}{box}
+
+
+%better example and proof environments
+\def\exampletext{Example} % If English
+\colorlet{colexam}{red!55!black} % Global example color
+
+
+\newtcbtheorem[number within=section]{example}{Example}{% \newtcolorbox[use counter=testexample]{testexamplebox}{%
+% Example Frame Start
+empty,% Empty previously set parameters
+title={\exampletext \thetcbcounter #1},% use \thetcbcounter to access the testexample counter text
+% Attaching a box requires an overlay
+attach boxed title to top left,
+   % Ensures proper line breaking in longer titles
+   minipage boxed title,
+% (boxed title style requires an overlay)
+boxed title style={empty,size=minimal,toprule=0pt,top=4pt,left=3mm,overlay={}},
+coltitle=colexam,fonttitle=\bfseries,
+before=\par\medskip\noindent,parbox=false,boxsep=0pt,left=3mm,right=0mm,top=2pt,breakable,pad at break=0mm,
+   before upper=\csname @totalleftmargin\endcsname0pt, % Use instead of parbox=true. This ensures parskip is inherited by box.
+% Handles box when it exists on one page only
+overlay unbroken={\draw[colexam,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+% Handles multipage box: first page
+overlay first={\draw[colexam,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+% Handles multipage box: middle page
+overlay middle={\draw[colexam,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },
+% Handles multipage box: last page
+overlay last={\draw[colexam,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); }%
+}{ex}
+
+
+
+\def\prooftext{Proof} % If English
+\NewDocumentEnvironment{Proof}{ O{} }
+{
+    \colorlet{colexam}{black!55!black} % Global example color
+    \newtcolorbox[number within=section]{testproofbox}{%
+        empty,% Empty previously set parameters
+        title={\emph{\prooftext} \thetcbcounter: #1},
+        attach boxed title to top left,
+        minipage boxed title,
+        boxed title style={empty,size=minimal,toprule=0pt,top=4pt,left=3mm,overlay={}},
+        coltitle=colexam,
+        fonttitle=\bfseries,
+        before=\par\medskip\noindent,
+        parbox=false,
+        boxsep=0pt,
+        left=3mm,
+        right=0mm,
+        top=2pt,
+        breakable,
+        pad at break=0mm,
+        before upper=\csname @totalleftmargin\endcsname0pt,
+        % Removed height constraints
+        % Added flexible width
+        width=\dimexpr\textwidth-3mm\relax,
+        % Modified overlays
+        overlay unbroken={\draw[colexam,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+        overlay first={\draw[colexam,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+        overlay middle={\draw[colexam,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },
+        overlay last={\draw[colexam,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },%
+    }
+    \begin{testproofbox}
+}
+{\end{testproofbox}\endlist}
+%/home/nathanael/Documents/Books/Mathematics/Dummit and Foote - Abstract Algebra.pdf
+%/home/nathanael/Documents/Books/Mathematics/
+
+
+%shortcuts for this file (newcommand and renewcommand)
+
+% I like original mathcal better, but need lowercase.
+\DeclareFontFamily{OT1}{pzc}{}
+\DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.10] pzcmi7t}{}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+% Custom Commands
+\newcommand{\A}{{\mathbb{A}}}
+\newcommand{\F}{{\mathbb{F}}}
+\newcommand{\N}{{\mathbb{N}}}
+\newcommand{\Q}{{\mathbb{Q}}}
+\newcommand{\R}{{\mathbb{R}}}
+\newcommand{\V}{{\mathbb{V}}}
+\newcommand{\Z}{{\mathbb{Z}}}
+\newcommand{\C}{{\mathbb{C}}}
+\renewcommand{\P}{{\mathbb{P}}}
+\renewcommand{\H}{{\mathbb{H}}}
+
+\newcommand{\CA}{{\mathcal{A}}}
+\newcommand{\CB}{{\mathcal{B}}}
+\newcommand{\CC}{{\mathcal{C}}}
+\newcommand{\CD}{{\mathcal{D}}}
+\newcommand{\CF}{{\mathcal{F}}}
+\newcommand{\CG}{{\mathcal{G}}}
+\newcommand{\CH}{{\mathcal{H}}}
+\newcommand{\CI}{{\mathcal{I}}}
+\newcommand{\CL}{{\mathcal{L}}}
+\newcommand{\CN}{{\mathcal{N}}}
+\newcommand{\CM}{{\mathcal{M}}}
+\newcommand{\CO}{{\mathcal{O}}}
+\newcommand{\co}{{\mathpzc{o}}}
+\newcommand{\CP}{{\mathcal{P}}}
+\newcommand{\RP}{{\mathbb{R}\mathrm{P}}}
+\newcommand{\CQ}{{\mathcal{Q}}}
+\newcommand{\CR}{{\mathcal{R}}}
+\newcommand{\CK}{{\mathcal{K}}}
+\newcommand{\CS}{{\mathcal{S}}}
+\newcommand{\CT}{{\mathcal{T}}}
+\newcommand{\CV}{{\mathcal{V}}}
+\newcommand{\CZ}{{\mathcal{Z}}}
+\newcommand{\ff}{{\mathscr{F}}}
+\newcommand{\EF}{{\EuScript{F}}}
+\newcommand{\EL}{{\EuScript{L}}}
+\newcommand{\EO}{{\EuScript{O}}}
+\newcommand{\EC}{{\EuScript{C}}}
+\newcommand{\fo}{{\mathfrak{o}}}
+\newcommand{\fa}{{\mathfrak{a}}}
+\newcommand{\fb}{{\mathfrak{b}}}
+\newcommand{\fc}{{\mathfrak{c}}}
+\newcommand{\fd}{{\mathfrak{d}}}
+\newcommand{\fm}{{\mathfrak{m}}}
+\newcommand{\fn}{{\mathfrak{n}}}
+\newcommand{\fp}{{\mathfrak{p}}}
+\newcommand{\fq}{{\mathfrak{q}}}
+\newcommand{\FA}{{\mathfrak{A}}}
+\newcommand{\FB}{{\mathfrak{B}}}
+\newcommand{\FP}{{\mathfrak{P}}}
+\newcommand{\FC}{{\mathfrak{C}}}
+\newcommand{\FD}{{\mathfrak{D}}}
+\newcommand{\FM}{{\mathfrak{M}}}
+\newcommand{\FN}{{\mathfrak{N}}}
+\newcommand{\FO}{{\mathfrak{O}}}
+
+
+
+\newcommand{\sse}{\subseteq}
+\newcommand{\nsse}{\not\subseteq}
+\newcommand{\ssne}{\subsetneq}
+\newcommand{\qn}{\quad\newline}
+\newcommand{\placeholder}{\_\_\_\_\_}
+\newcommand{\subg}{\leqslant}
+%\newcommand{\subgne}{\lneqslant}
+\newcommand{\supg}{\geqslant}
+\newcommand{\nsubg}{\trianglelefteq}
+\newcommand{\csubg}{\blacktriangleleft}
+\newcommand{\nsupg}{\trianglerighteq}
+\newcommand{\isosubg}{\lesssim}
+\renewcommand{\mid}{\big|}
+\renewcommand{\phi}{\varphi}
+
+\newcommand{\oln}[1]{{\overline{#1}}}
+\renewcommand{\bf}[1]{\textbf{#1}}
+
+\renewcommand{\mod}{\,\operatorname{mod}\,}
+\renewcommand{\div}{{\operatorname{div}}}
+
+\newcommand{\ev}{{\operatorname{ev}}}
+\newcommand{\tr}{{\operatorname{tr}}}
+\newcommand{\nm}{{\operatorname{Nm}}}
+\newcommand{\op}{{\operatorname{op}}}
+\newcommand{\ad}{{\operatorname{ad}}}
+\newcommand{\rk}{{\operatorname{rk}}}
+\newcommand{\im}{{\operatorname{im}}}
+\newcommand{\id}{{\operatorname{id}}}
+\newcommand{\ch}{{\operatorname{ch}}}
+\newcommand{\an}{{\operatorname{an}}}
+\newcommand{\ns}{{\operatorname{ns}}}
+\newcommand{\nr}{{\operatorname{nr}}}
+\newcommand{\ab}{{\operatorname{ab}}}
+\newcommand{\Ch}{{\operatorname{Ch}}}
+\newcommand{\Br}{{\operatorname{Br}}}
+\newcommand{\SL}{{\operatorname{SL}}}
+\newcommand{\GL}{{\operatorname{GL}}}
+\newcommand{\rad}{{\operatorname{rad}}}
+\newcommand{\sep}{{\operatorname{sep}}}
+\newcommand{\vol}{{\operatorname{vol}}}
+\newcommand{\ord}{{\operatorname{ord}}}
+\newcommand{\tors}{{\operatorname{tors}}}
+\newcommand{\trdeg}{{\operatorname{trdeg}}}
+\newcommand{\acton}{{\curvearrowright}}
+\newcommand{\actson}{{\curvearrowright}}
+
+\newcommand{\Gal}{{\operatorname{Gal}}}
+\newcommand{\Rep}{{\operatorname{Rep}}}
+\newcommand{\Aut}{{\operatorname{Aut}}}
+\newcommand{\Sym}{{\operatorname{Sym}}}
+\newcommand{\Mod}[1][]{{}_{#1}\operatorname{Mod}}
+\newcommand{\RMod}{{}_R\operatorname{Mod}}
+\newcommand{\Grp}{{\textbf{Grp}}}
+\newcommand{\Set}{{\textbf{Set}}}
+\newcommand{\Fld}{{\textbf{Fld}}}
+\newcommand{\Pic}{{\operatorname{Pic}}}
+\newcommand{\Div}{{\operatorname{Div}}}
+\newcommand{\Hom}{{\operatorname{Hom}}}
+\newcommand{\Emb}{{\operatorname{Emb}}}
+\newcommand{\Ext}{{\operatorname{Ext}}}
+\newcommand{\End}{{\operatorname{End}}}
+\newcommand{\Inn}{{\operatorname{Inn}}}
+\newcommand{\Int}{{\operatorname{int}}}
+\newcommand{\Irr}{{\operatorname{Irr}}}
+\newcommand{\Ind}{{\operatorname{Ind}}}
+\newcommand{\Out}{{\operatorname{Out}}}
+\newcommand{\Jac}{{\operatorname{Jac}}}
+\newcommand{\Nil}{{\operatorname{Nil}}}
+\newcommand{\Tor}{{\operatorname{Tor}}}
+\newcommand{\Top}{{\operatorname{Top}}}
+\newcommand{\Ann}{{\operatorname{Ann}}}
+\newcommand{\Syl}{{\operatorname{Syl}}}
+\newcommand{\Res}{{\operatorname{Res}}}
+\newcommand{\lcm}{{\operatorname{lcm}}}
+\newcommand{\conj}{{\operatorname{conj}}}
+\newcommand{\disc}{{\operatorname{disc}}}
+\newcommand{\stab}{{\operatorname{stab}}}
+\newcommand{\kdim}{{\operatorname{kdim}}}
+\newcommand{\diag}{{\operatorname{diag}}}
+\newcommand{\coker}{{\operatorname{coker}}}
+\newcommand{\Obj}{{\operatorname{Obj}}}
+\newcommand{\Mor}[1]{\operatorname{Mor}(\textbf{#1})}
+\newcommand{\Frac}{{\operatorname{Frac}}}
+\newcommand{\Frob}{{\operatorname{Frob}}}
+\newcommand{\Spec}{{\operatorname{Spec}}}
+\newcommand{\mSpec}{{\operatorname{mSpec}}}
+\newcommand{\Tens}[1]{#1\otimes \_\_}
+\newcommand{\Char}{{\operatorname{char}}}
+\newcommand{\Span}{{\operatorname{span}}}
+\newcommand{\Lim}{{\varprojlim}}
+\newcommand{\colim}{{\varinjlim}}
+\newcommand{\coLim}{{\varinjlim}}
+\newcommand{\Dlim}{\lim\limits_{\longrightarrow}}
+\newcommand{\coDlim}{\lim\limits_{\longleftarrow}}
+\newcommand{\codim}{{\operatorname{codim}}}
+\newcommand{\fHom}[1]{\operatorname{Hom}(#1, \_\_)}
+\newcommand{\cofHom}[1]{\operatorname{Hom}(\_\_, #1)}
+
+\renewcommand{\Re}{{\operatorname{Re}}}
+\renewcommand{\Im}{{\operatorname{Im}}}
+
+%for saturated ideals in the localization section
+\newcommand{\LIm}{{}^{\iota} }
+\newcommand{\LPre}{{}^{\pi} }
+
+% Arrows
+\newcommand{\rw}{\rightarrow}
+\newcommand{\rrw}{\rightrightarrows}
+\newcommand{\Rw}{\Rightarrow}
+\newcommand{\lw}{\leftarrow}
+\newcommand{\Lw}{\Leftarrow}
+\newcommand{\lrw}{\leftrightarrow}
+\newcommand{\LRw}{\Leftrightarrow}
+
+\newcommand{\dcup}{\sqcup}
+\newcommand{\Dcup}{\coprod}
+\newcommand{\set}[2]{\left\{#1 \ \middle|\ #2\right\}}
+
+\newcommand\mapsfrom{\mathrel{\reflectbox{\ensuremath{\mapsto}}}}
+
+\newcommand{\tikzcircle}[2][red,fill=black]{\tikz[baseline=-0.5ex]\draw[#1,radius=#2] (0,0) circle ;}%
+
+\def\rddots{\mathstrut^{.^{.^{.}}}}
+
+\makeatletter
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+%% new delimiter
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+
+\setlength{\parindent}{0pt} % don't like indentation infront of paragraphs
+\setlength{\parskip}{1ex}   %so that there is still space between paragarphs
+
+
+%for Dynkin diagrams
+\def\row#1/#2!{#1_{\IfStrEq{#2}{}{n}{#2}} & \dynkin{#1}{#2}\\}
+\newcommand{\tble}[1]{
+   \renewcommand*\do[1]{\row##1!}
+   \[
+      \begin{array}{ll}\docsvlist{#1}\end{array}
+   \]
+}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\usepackage{import}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+    \import{./figures/}{#2.pdf_tex}
+}
+
+\pdfsuppresswarningpagegroup=1
+
+
+\definecolor{LinkColour}{HTML}{A64A3B} % favourite
+% \definecolor{LinkColour}{HTML}{8C3D32} % 2nd place
+\hypersetup{
+  colorlinks,
+  citecolor=black,
+  filecolor=magenta,
+  linkcolor=LinkColour,
+  urlcolor=blue,
+}
+
+\begin{document}

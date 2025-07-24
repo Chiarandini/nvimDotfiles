@@ -1,0 +1,11 @@
+-- local M = {}
+--
+-- function M.closeBuf()
+-- 	local bufname = vim.fn.bufname()
+-- 	if bufname == nil then
+-- 		return 'ZQ'
+-- 	end
+-- 	return '<cmd>bdelete<cr>'
+-- end
+--
+-- return M

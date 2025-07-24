@@ -1,0 +1,30 @@
+--prettier notification
+-- see https://github.com/folke/noice.nvim#%EF%B8%8F-configuration
+-- NOTE: trying snacks out
+return {}
+-- return{
+-- 	{'rcarriga/nvim-notify',
+-- 	event = 'VeryLazy',
+-- 	config = function()
+-- 		require('configs.notify')
+-- 	end},
+
+	-- {
+	-- "folke/noice.nvim",
+	-- event = "VeryLazy",
+	-- dependencies = {
+	-- 	-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+	-- 	"MunifTanjim/nui.nvim",
+	-- 	-- OPTIONAL:
+	-- 	--   `nvim-notify` is only needed, if you want to use the notification view.
+	-- 	--   If not available, we use `mini` as the fallback
+	-- 	"rcarriga/nvim-notify",
+	-- 	"nvim-lualine/lualine.nvim",
+	-- 	"Mr-LLLLL/lualine-ext.nvim"
+	-- },
+	-- config = function()
+	-- 	require('configs.noice')
+	-- 	require("lualine-ext").init_noice()
+	-- end,
+	-- }
+-- }

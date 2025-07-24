@@ -1,0 +1,4 @@
+runtimepath.txt
+/lua/secrets.lua
+spotifyApi.py
+*cache*

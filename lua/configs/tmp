@@ -1,0 +1,41 @@
+local function go_to_tags_end_and_insert()
+  local function find_tags_end()
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    local tags_start_index = nil
+    for i, line in ipairs(lines) do
+      if string.find(line, "^tags:") then
+        tags_start_index = i
+        break
+      end
+    end
+
+    if not tags_start_index then
+      return nil
+    end
+
+    -- Find the end of the tags list. Look for the first line that *doesn't* start with "-".
+    for i = tags_start_index + 1, #lines do
+      if not string.find(lines[i], "^%s*%-") then
+        return i
+      end
+    end
+
+    -- If we reach the end of the file, it means the tags list extends to the end of the file.
+    return #lines + 1
+  end
+
+  local end_index = find_tags_end()
+
+  if end_index then
+    vim.api.nvim_win_set_cursor(0, { end_index, 1 })
+    vim.api.nvim_feedkeys("A", "n", false) -- A appends to the end of the line
+  else
+    vim.notify("Could not find 'tags:' section or the end of the tags list.", vim.log.levels.WARN)
+  end
+end
+
+vim.api.nvim_create_user_command(
+  "GoToTagsEndAndInsert",
+  go_to_tags_end_and_insert,
+  {}
+)
