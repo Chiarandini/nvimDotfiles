@@ -35,5 +35,5 @@ function _G.toggle_term()
 	vim.cmd("startinsert")
 end
 
-vim.keymap.set("n", "<c-w><c-t>", ":lua toggle_term()<CR>", { noremap = true, silent = true, desc = "toggle terminal" })
-vim.keymap.set("t", "<c-w><c-t>", "<C-\\><C-n>:lua toggle_term()<CR>", { noremap = true, silent = true, desc = "toggle terminal" })
+-- vim.keymap.set("n", "<c-w><c-t>", ":lua toggle_term()<CR>", { noremap = true, silent = true, desc = "toggle terminal" })
+-- vim.keymap.set("t", "<c-w><c-t>", "<C-\\><C-n>:lua toggle_term()<CR>", { noremap = true, silent = true, desc = "toggle terminal" })

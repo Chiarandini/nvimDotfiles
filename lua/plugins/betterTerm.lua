@@ -9,24 +9,29 @@ return
 	-- config = function()
 	-- 	require('floaterm').setup()
 	-- end
+},
+{
+	'CRAG666/betterTerm.nvim',
+	event = 'TermOpen',
+keys = {
+	-- toggle firts term
+	{
+		'<c-w><c-t>',
+		function() require('betterTerm').open() end,  -- vim.cmd([[doautocmd TermOpen]])
+		mode = {'n', 't'},
+		desc = "Open terminal",
+	},
+	{
+		"<localleader>t",
+		function() require('betterTerm').select() end,
+		mode = {'n', 't'},
+		{ desc = "Select terminal"},
+	},
+},
+config = function()
+	require('betterTerm').setup()
+end
 }
--- {
--- 	'CRAG666/betterTerm.nvim',
--- event = 'TermOpen',
--- -- keys = {
--- 	-- toggle firts term
--- 	-- {
--- 	-- 	'<c-;>',
--- 	-- 	function() require('betterTerm').open() vim.cmd([[doautocmd TermOpen]]) end,
--- 	-- 	mode = {'n', 't'},
--- 	-- 	desc = "Open terminal",
--- 	-- },
--- 	-- {'<space>T', function() require('betterTerm').select() end, desc = " Select Terminal"},
--- -- },
--- config = function()
--- 	require('betterTerm').setup()
--- end
--- }
 }
 
 

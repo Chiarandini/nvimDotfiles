@@ -46,9 +46,9 @@ local lspColor = {
 }
 local colors = {
   -- {{
-  default_gray = "#333333",   -- #504944
-  light_gray = "#504944",     -- #333333
-  text_gray = gruvbox_text,   --"#CDB89A", --#C5AF92
+  default_gray = "#333333",
+  light_gray = "#504944",
+  text_gray = gruvbox_text, "#CDB89A",
   text_unselected = "#7C6F64",
   text_light_gray = "#CDB89A", --#C5AF92
   light_green = "#8BBA7F",
@@ -56,7 +56,6 @@ local colors = {
   light_orange = "#FFE28B",
   light_blue = "#4DB6E6",
   medium_blue = "#2B8CBC", -- #5EC0E1
-  -- medium_blue = "#5EC0E1",
   default_blue = "#153E5B",
   yellow = "#E9B144",
   bright_bg = utils.get_highlight("Folded").bg,
@@ -77,10 +76,22 @@ local colors = {
   git_add = "#B9BB25",
   git_change = "#8DC07C",
   git_del = "#FB4A34",
+
+  -- Refactored & New Colors
+  visual_orange = "#FF8700",
+  visual_select_orange = "#FF9933",
+  command_line = "#B8BB26", -- #AFDF01", #B8BB26, #689D6A, #8EC07C
+  command_ex_line = "#BEEF01",
+  select_block_orange = "#FFD766",
+  replace_variation_red = "#F04C4C",
+  insert_completion_blue = "#7AC8F0",
+  normal_insert_green = "#9CC901",
+  normal_terminal_green = "#A1C101",
+  terminal_blue = "#B16286", -- "#61AEE4", , #4FB4A7,#D65D0E
   -- }}
 }
 
-local mode_names = { -- change the strings if you like it vvvvverbose!
+local mode_names = {
   -- {{
   n = "N",
   no = "N?",
@@ -118,23 +129,58 @@ local mode_names = { -- change the strings if you like it vvvvverbose!
   t = "T",
   -- }}
 }
+
 local mode_colors = {
   -- {{
+  -- Base Modes
   n = colors.green,
-  no = colors.light_orange,
-  nov = colors.light_orange,
   i = colors.light_blue,
-  v = "#FF8700",
-  V = "#FF8700",
-  ["\22"] = "cyan",
-  c = "#AFDF01",
+  v = colors.visual_orange,
+  V = colors.visual_orange,
   s = colors.light_orange,
   S = colors.light_orange,
-  ["\19"] = colors.light_orange,
-  R = "red",
-  r = "red",
-  ["!"] = "yellow",
-  t = colors.light_green,
+  R = colors.red,
+  c = colors.command_line,
+  t = colors.terminal_blue,
+
+  -- Normal Mode Variations
+  no = colors.light_orange, -- Operator-pending
+  nov = colors.light_orange,
+  noV = colors.light_orange,
+  ["no\22"] = colors.light_orange,
+  niI = colors.normal_insert_green,
+  niR = colors.normal_insert_green,
+  niV = colors.normal_insert_green,
+  nt = colors.normal_terminal_green,
+
+  -- Visual Mode Variations
+  vs = colors.visual_select_orange,
+  Vs = colors.visual_select_orange,
+  ["\22"] = colors.cyan, -- Visual Block
+  ["\22s"] = colors.cyan,
+
+  -- Select Mode Variations
+  ["\19"] = colors.select_block_orange, -- Select Block
+
+  -- Insert Mode Variations
+  ic = colors.insert_completion_blue,
+  ix = colors.insert_completion_blue,
+
+  -- Replace Mode Variations
+  r = colors.red,
+  Rv = colors.replace_variation_red, -- Virtual Replace
+  Rc = colors.replace_variation_red,
+  Rx = colors.replace_variation_red,
+  Rvc = colors.replace_variation_red,
+  Rvx = colors.replace_variation_red,
+
+  -- Command Mode Variations
+  cv = colors.command_ex_line,
+
+  -- Other Modes
+  rm = colors.yellow, -- More prompt
+  ["r?"] = colors.light_orange, -- Confirmation prompt
+  ["!"] = colors.yellow, -- Shell
   -- }}
 }
 -- }}
