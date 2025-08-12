@@ -296,7 +296,7 @@ local OilCircle = {
 
 --japanese mode
 -- {{
-local JapaneseMode = {
+local KeyboardMode = {
   condition = function()
     return vim.g.KeyboardMode == true
   end,
@@ -340,7 +340,7 @@ local ViMode = {
     fallthrough = false, -- stop at first child that evaluates to true
     SearchResults,
     OilCircle,
-    JapaneseMode,
+    KeyboardMode,
     {
 
       flexible = priority.high,
