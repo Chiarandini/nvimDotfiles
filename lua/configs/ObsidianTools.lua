@@ -236,7 +236,7 @@ vim.keymap.set("n", "<leader>oN", add_new_tag_group, { desc = "add New tag group
 vim.keymap.set('n',"<space>og",
 function()
 	require("telescope.builtin").live_grep({
-		search_dirs = { "~/Library/CloudStorage/-Personal/Documents/NateObsidianVault" },
+		search_dirs = { "~/Documents/NateObsidianVault/" },
 		prompt_title = "[o]bsidian [g]rep",
 	})
 end,

@@ -22,7 +22,6 @@ return {
 	},
 	{
 		"ObsidianTools.nvim",
-		-- ft = {"markdown"},
 		event = "VeryLazy",
 		dev = true,
 		config = function()

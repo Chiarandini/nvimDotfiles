@@ -102,3 +102,7 @@ end, {})
 vim.api.nvim_create_user_command("UpdateBlogPage", function()
 	websiteTools.updateBlogPage()
 end, {})
+
+vim.api.nvim_create_user_command("UpdateNotesPage", function()
+	websiteTools.updateNotesPage()
+end, {})

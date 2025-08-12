@@ -10,7 +10,7 @@
 -- vim.cmd([[command! U cd ~//Documents/University/master's/]])
 -- vim.cmd([[command! CONFIG cd ~/.config/nvim]])
 
--- with one exception, I use this often
+-- with two exception, I use this often
 vim.cmd([[command! J cd ~//Documents/junk/]])
 vim.cmd([[command! W cd ~//Documents/NateObsidianVault/]])
 --}}

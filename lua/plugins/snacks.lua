@@ -52,7 +52,7 @@ local function fuzzy_snacks_explorer()
 					items = items,
 					layout = { preset = "select" },
 					format = "text",
-					title = "Onedrive Documents", -- Set the title for the picker window
+					title = "Documents", -- Set the title for the picker window
 					confirm = function(picker, item)
 						picker:close()
 						local full_path = search_dir .. item.text

@@ -137,6 +137,10 @@ return
 	s(
 	{trig = 'RHS', name = 'right hand side'},
 	t('right hand side')	),
+	-- left hand side
+	s(
+	{trig = 'RRR', name = 'ref:HERE'},
+	t('\\textcolor{red}{ref:HERE}')	),
 	-- otoh
 	s(
 	{trig = 'otoh', name = 'on the other hand'},

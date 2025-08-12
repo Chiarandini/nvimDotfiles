@@ -73,7 +73,7 @@ opt.wildignore=opt.wildignore .. "*/.git/*,*.swp"
 opt.wrap = true
 --remember many more old files
 opt.shada = "'1000,<50,s10,h"
---opt.shada='1000,<50,s10,h
+--default saved in case you change: opt.shada='1000,<50,s10,h
 
 -- don't scroll too far off the end of the line
 opt.scrolloff = 4
@@ -94,7 +94,7 @@ vim.opt.spelllang = { 'en_us' }
 -- for spell-checking in Cased word
 -- vim.opt.spelloptions = 'Cased'
 
--- Fixes bug on empty latex files
+-- Fixes (old) bug on empty latex files
 vim.tex_flavor= "latex"
 
 -- set default directory
@@ -107,7 +107,7 @@ opt.undolevels=1000
 opt.undoreload=10000
 -- for better session restoration
 opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
--- DON'T DO: messes with gruvbox
+-- old option that insures terminals have gui colours enabled
 opt.termguicolors = true
 -- do not show fold-level on the size
 opt.foldcolumn = '0'
@@ -128,7 +128,7 @@ opt.autowriteall = true
 
 -- default want to conceal as much as possible
 vim.o.conceallevel = 2
--- for latex, what to conceal.
+-- for latex, what to conceal
 vim.gtex_conceal = "abdgm"
 -- make sure to still see command when cmdheight=0
 -- opt.showcmdloc = 'statusline'

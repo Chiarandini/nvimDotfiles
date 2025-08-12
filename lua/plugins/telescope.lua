@@ -91,6 +91,7 @@ local stackOptions = { -- layout information in config
 	ignore_current_buffer = true,
 }
 
+
 return {
 
 	-- ISSUE: breaks :Telescope headings (original use: for faster file navigation)
@@ -111,6 +112,14 @@ return {
 		config = function()
 			require("browser_bookmarks").setup()
 		end,
+	},
+	{
+		"TelescopeTools.nvim",
+		event = "VeryLazy",
+		dev = true,
+		config = function()
+			require('configs.TelescopeTools')
+		end
 	},
 
 	{
@@ -518,12 +527,14 @@ return {
 
 			-- document in books
 			-- { '<space>db', function() require('telescope.builtin').find_files({cwd = "/Users/nathanaelchwojko-srawkey/Documents/books/"}) end , desc = '[d]ocument [b]ooks'},
+
 			-- document in books
-			{
-				"<space>fdb",
-				function() telescope_open_execute('/Users/nathanaelchwojko-srawkey/Documents/books/') end,
-				desc = "[d]ocument [b]ooks",
-			},
+			-- {
+			-- 	"<space>fdb",
+			-- 	function() telescope_open_execute('/Users/nathanaelchwojko-srawkey/Documents/books/') end,
+			-- 	desc = "[d]ocument [b]ooks",
+			-- },
+
 			-- document with [e]YNTKA
 			-- vim.keymap.set('n', '<space>de', function() builtin.find_files({cwd = "/Users/nathanaelchwojko-srawkey/Documents/University/", prefilter_sorter="EYNTKA"}) end , {})
 			--  ╔═════════════════════════════════════════════════════════╗

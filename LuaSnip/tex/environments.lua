@@ -152,7 +152,8 @@ return
 					i(1)
 				}),
 			}
-			)		),
+			)
+		),
 	--
 	-- 	-- definition environment
 		s(
@@ -264,18 +265,20 @@ return
 				show_condition = helper.at_line_start_tcolor,
 			}
 		),
+
 		s(
-			{trig = ':box', name = 'titled box'},
+			{ trig = ':box%s?' .. regTrigger, regTrig = true, wordTrig= false, name = 'Create TitledBox', dscr = 'Create a box with auto-generated tag ' },
 			fmta([[
-			\begin{titledBox}{<>}
+			\begin{titledBox}{<>}{<>}
 				<>
 			\end{titledBox}
 			]],
 			{
-				i(1),
-				d(2, get_visual_insert),
+				d(2, makeTitle), d(3, makeTitleRef),
+				d(1, get_visual_insert),
 			}
-			)		)
+			)
+		),
 	},
 	--  ┌                                                          ┐
 	--  │                                                          │

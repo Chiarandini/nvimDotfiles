@@ -64,7 +64,7 @@ return {
 	},
 	{
 		'akinsho/git-conflict.nvim',
-		ft = vim.g.prog_ft,
+		ft = vim.g.programming_ft,
 		version = "*",
 		config = true,
 	},

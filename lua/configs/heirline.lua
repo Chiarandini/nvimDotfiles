@@ -80,7 +80,7 @@ local colors = {
   -- Refactored & New Colors
   visual_orange = "#FF8700",
   visual_select_orange = "#FF9933",
-  command_line = "#B8BB26", -- #AFDF01", #B8BB26, #689D6A, #8EC07C
+  command_line = "#AFDF01", -- "#AFDF01", #B8BB26, #689D6A, #8EC07C,"#B8BB26"
   command_ex_line = "#BEEF01",
   select_block_orange = "#FFD766",
   replace_variation_red = "#F04C4C",
@@ -279,6 +279,8 @@ local ReadOnlyFlag = {
 }
 -- }}
 
+--Oil Circle
+-- {{
 local OilCircle = {
   condition = function()
     return vim.o.filetype == "oil"
@@ -290,6 +292,22 @@ local OilCircle = {
     return "Oil"
   end,
 }
+-- }}
+
+--japanese mode
+-- {{
+local JapaneseMode = {
+  condition = function()
+    return vim.g.KeyboardMode == true
+  end,
+
+  hl = { fg = colors.default_blue },
+
+  provider = function()
+    return "J"
+  end,
+}
+-- }}
 
 -- mode selector (ViMode)
 -- {{
@@ -322,6 +340,7 @@ local ViMode = {
     fallthrough = false, -- stop at first child that evaluates to true
     SearchResults,
     OilCircle,
+    JapaneseMode,
     {
 
       flexible = priority.high,

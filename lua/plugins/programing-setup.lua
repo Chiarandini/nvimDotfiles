@@ -11,7 +11,7 @@ return {
 	{
 		"voxelprismatic/rabbit.nvim",
 		keys = "<c-t>",
-		ft = vim.g.prog_ft,
+		ft = vim.g.programming_ft,
 		config = function()
 			require("configs.rabbit")
 		end,
@@ -118,7 +118,7 @@ return {
 
 	{ -- inline virtual text showing colour
 		"brenoprata10/nvim-highlight-colors",
-		ft = vim.g.prog_ft,
+		ft = vim.g.programming_ft,
 		config = function()
 			require("configs.highlight-colors")
 		end,

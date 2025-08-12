@@ -26,7 +26,7 @@ local icons = {
 	Breakpoint = " ",
 	BreakpointCondition = " ",
 	BreakpointRejected = { " ", "DiagnosticError" },
-	LogPoint = ".>",
+	LogPoint = " >",
 }
 
 for name, sign in pairs(icons) do

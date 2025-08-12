@@ -22,7 +22,9 @@
 -- so that autoread refreshes buffer with these events
 -- vim.cmd([[au FocusGained,BufEnter,FileChangedShell,CursorMoved * :checktime])
 
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "FileChangedShell", "CursorMoved" }, {
+-- This is the vim way of sending an update of any kind, but this is pretty hacky and not
+-- actually good enough
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "FileChangedShell", "CursorMoved", }, {
   pattern = "*",
   callback = function()
     vim.cmd("checktime")
