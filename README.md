@@ -4,7 +4,7 @@ A Neovim configuration built with Lua and the [Lazy.nvim](https://github.com/fol
 ## ✨ Features
 
 <!-- - **📝 Multi-language Support**: Enhanced support for LaTeX, Markdown, Python, Lua, and more -->
-- **🔍 Powerful Search & Navigation**: Telescope/snack-picker integration with fuzzy finding, project search, and file navigation
+- **Search & Navigation**: Telescope/snack-picker integration with fuzzy finding, project search, and file navigation
 - **Advanced LSP**: Full Language Server Protocol integration with auto-completion, diagnostics, and code actions
 - **Custom UI**: Custom statusline, tabline, and colorscheme, including toggle-able animations.
 - **Academic Writing**: Comprehensive LaTeX support with VimTeX, custom snippets, and PDF compilation
