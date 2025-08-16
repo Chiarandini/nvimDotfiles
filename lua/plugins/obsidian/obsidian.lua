@@ -21,14 +21,6 @@ return {
 		end,
 	},
 	{
-		"ObsidianTools.nvim",
-		event = "VeryLazy",
-		dev = true,
-		config = function()
-			require('configs.ObsidianTools')
-		end
-	},
-	{
 		'Thiago4532/mdmath.nvim',
 		ft = "markdown",
 		config = function()

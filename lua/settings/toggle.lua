@@ -91,7 +91,7 @@ map("]C", "<cmd>lua TOGGLE_CMP(false)<cr>", "disable nvim-cmp")
 
 -- for messages in statusline
 -- map("[i","<cmd>let g:ToggleMsgInStatusline=1<cr><cmd>echo \"ToggleMsgInStatusline\"<cr>",'toggle lualine showing message')
--- map("]i","<cmd>let g:ToggleMsgInStatusline=0<cr><cmd>echo \"noToggleMsgInStatusline\"<cr>",'toggle lualine showing message')
+-- map("]i","<cmd>let g:ToggleMsgInStatusline=0<cr><cmd>echo \"noToggleMsgInStatusline\"<cr>",'toggle lualine showing m  essage')
 
 -- for seeing pdf size (checking live compiling)
 map(

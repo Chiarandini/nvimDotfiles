@@ -41,7 +41,10 @@ require("settings.options")
 --  ╚══════════════════════════════════════════════════════════╝
 -- see ./lua/plugins/ for to setup the plugins
 
-require('settings.lazy')
+-- INFO: will add in this require the ability to import core and optional
+-- plugings
+local plugin_spec = require('settings.plugin-bundle-management')
+require('settings.lazy').setup(plugin_spec)
 
 
 --  ╔══════════════════════════════════════════════════════════╗

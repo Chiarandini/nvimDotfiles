@@ -113,17 +113,17 @@ The statusline displays comprehensive information:
 | `<C-o>` | Oil file manager |
 | `<C-r>` | Multi-replace |
 | `<C-s>` | Spectre search/replace |
-| `<C-t>` | Translation |
+| `<C-t>` | open terminal |
 | `<C-u>` | Undo tree |
 | `<C-m>` | Mason package manager |
 | `<C-l>` | LSP info |
+| `<c-e>` | File explorer toggle |
 | `d` | Debug UI |
 | `h` | Harpoon |
 | `o` | Outline/symbols |
 | `l` | Lazy plugin manager |
-| `t` | Terminal toggle |
-| `e` | File explorer toggle |
 
+<!-- | `t` | erminal toggle | -->
 ### Navigation Leader (`<Space>`) - Search & Find
 | Key | Action |
 |-----|--------|

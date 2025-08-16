@@ -110,7 +110,7 @@ return {
 		opts = {
 		  setup = {
 		    osv = function(_, _)
-		  	require("plugins.dap.lua").setup()
+		  	require("core-plugins.dap.lua").setup()
 		    end,
 		  },
 		},

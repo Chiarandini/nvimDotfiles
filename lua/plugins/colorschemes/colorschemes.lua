@@ -47,14 +47,6 @@ return {
 	-- 		vim.cmd.colorscheme("neofusion")
 	-- 	end,
 	-- },
-	{
-		"ellisonleao/gruvbox.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			vim.cmd.colorscheme("gruvbox")
-		end,
-	},
 
 	--backup in case top doesn't work
 	-- 'morhetz/gruvbox'
