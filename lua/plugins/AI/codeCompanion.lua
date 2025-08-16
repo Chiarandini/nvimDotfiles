@@ -1,4 +1,3 @@
--- return {}
 return {
 	"olimorris/codecompanion.nvim",
 	event = "VeryLazy",
