@@ -1,6 +1,6 @@
 # 🚀 My Neovim Configuration
 
-A Neovim configuration built with Lua and the [Lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager. This is my personal setup that focuses my text-editing needs which primarily includes latex, markdown, lua, python, and a few other programming languages I occasionally use.
+A Neovim configuration built with Lua and the [Lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager. This is my personal setup that focuses on my text-editing needs which primarily includes latex, markdown, lua, python, typescript, and a few other programming languages I occasionally use.
 ## ✨ Features
 
 <!-- - **📝 Multi-language Support**: Enhanced support for LaTeX, Markdown, Python, Lua, and more -->
