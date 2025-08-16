@@ -17,7 +17,8 @@ A Neovim configuration built with Lua and the [Lazy.nvim](https://github.com/fol
 nvim/
 ├── lua/
 │   ├── configs/         # Plugin configuration files
-│   ├── plugins/         # Plugin installation and setup (Lazy.nvim specs)
+│   ├── core-plugins/    # Plugin installation and setup (Lazy.nvim specs)
+│   ├── plugins/         # optional additional bundles
 │   ├── settings/        # Core Neovim settings, keymaps, and autocommands
 │   ├── sources/         # Custom completion sources
 │   └── utils/           # Helper functions and utilities
