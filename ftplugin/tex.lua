@@ -121,6 +121,7 @@ Abolish -buffer bc because
 
 -- make textwidth bigger for tex files
 vim.bo.textwidth = 110
+vim.cmd([[setlocal spell]])
 
 -- these follow from this website: https://castel.dev/post/lecture-notes-2/
 vim.keymap.set('i', '<c-s-f>', function()

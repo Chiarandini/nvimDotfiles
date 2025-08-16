@@ -33,26 +33,19 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "FileChangedShell", "Cu
 
 -- vim.cmd([[au FocusGained,BufEnter,CursorMoved, * :checktime]])
 
-local autogroup_ft = vim.api.nvim_create_augroup("myfiletype", { clear = true })
-
--- vim.api.nvim_create_autocmd("InsertLeavePre", {
---     -- pattern = {"*"},
---     group = autogroup_ft,
---     callback = function()
--- 		vim.cmd('w')
---     end,
---    }
+--NOTE: might be better to do this as filetype deteciton; I put it there
+-- local autogroup_set_spell = vim.api.nvim_create_augroup("myfiletype", { clear = true })
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = {'markdown', 'txt', 'tex'},
+--     command= "setlocal spell",
+--     -- callback = function()
+--     --     vim.api.nvim_win_set_option(0, "spell", true)
+--     -- end,
+--     group = autogroup_set_spell
+--   }
 -- )
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = {'markdown', 'txt', 'tex'},
-    command= "setlocal spell",
-    -- callback = function()
-    --     vim.api.nvim_win_set_option(0, "spell", true)
-    -- end,
-    group = autogroup_ft
-  }
-)
+
 
 -- close quickfix menu after selecting choice
 -- NOTE: this is the responsibility of ftplugin/qf.lua
@@ -66,7 +59,7 @@ vim.api.nvim_create_autocmd("FileType", {
 --
 
 
- vim.api.nvim_create_augroup('heirlineComponentUpdate', {clear = true})
+vim.api.nvim_create_augroup('heirlineComponentUpdate', {clear = true})
 
 vim.api.nvim_create_autocmd("User", {
     group = "heirlineComponentUpdate",

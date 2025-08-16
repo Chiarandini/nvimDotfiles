@@ -13,6 +13,7 @@ end
 local Opts = function(desc)
 	return  {silent = true, buffer = true, desc = desc}
 end
+vim.cmd([[setlocal spell]])
 
 vim.keymap.set("i", "<s-cr>", addTagLine, { buffer = true })
 vim.keymap.set('i', '<c-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', Opts('auto spell fix'))

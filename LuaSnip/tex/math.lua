@@ -157,7 +157,7 @@ return
 {
 	-- overline
 	s(
-		{trig = 'BB', name = 'overline (bar)'},
+		{trig = 'BB', name = 'overline (bar)', wordTrig=false},
 		{ t('\\overline{'), d(1, get_visual_insert_node), t('}') },
 		{
 			condition = tex_utils.in_mathzone,

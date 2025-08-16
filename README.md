@@ -1,223 +1,323 @@
-# Dotfiles
+# 🚀 My Neovim Configuration
 
-These are a collection of my Dotfiles. I will eventually add an explanation of the
-philosophy of my setup and the key shortcuts to navigate it efficiently. Currently, there
-is no good way to one-click install it. It is also assumed that you are completely
-familiar with \[most of\] vim/nvim and lazy (ex. options, local to buffer/window/tab,
-auto-commands, ftplugins, diff modes like {x,v,s,n}, lua, nvim api, folding, lazy, lsp,
-and so forth).
+A Neovim configuration built with Lua and the [Lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager. This is my personal setup that focuses my text-editing needs which primarily includes latex, markdown, lua, python, and a few other programming languages I occasionally use.
+## ✨ Features
 
+<!-- - **📝 Multi-language Support**: Enhanced support for LaTeX, Markdown, Python, Lua, and more -->
+- **🔍 Powerful Search & Navigation**: Telescope/snack-picker integration with fuzzy finding, project search, and file navigation
+- **Advanced LSP**: Full Language Server Protocol integration with auto-completion, diagnostics, and code actions
+- **Custom UI**: Custom statusline, tabline, and colorscheme, including toggle-able animations.
+- **Academic Writing**: Comprehensive LaTeX support with VimTeX, custom snippets, and PDF compilation
+- **Developer Tools**: Integrated debugging, terminal, git workflow, and project management
+- **Performance Optimized**: Fast startup with lazy loading and disabled unnecessary providers
 
-# Major information
+## 🗂️ Configuration Structure
 
-Important properties:
+```
+nvim/
+├── lua/
+│   ├── configs/         # Plugin configuration files
+│   ├── plugins/         # Plugin installation and setup (Lazy.nvim specs)
+│   ├── settings/        # Core Neovim settings, keymaps, and autocommands
+│   ├── sources/         # Custom completion sources
+│   └── utils/           # Helper functions and utilities
+├── LuaSnip/            # Custom LuaSnip snippets (Lua-based, not VSCode format)
+├── ftplugin/           # Filetype-specific configurations
+├── preamble/           # LaTeX preamble templates and chunks
+├── queries/            # Custom Tree-sitter queries
+├── spell/              # Custom dictionary words for spellchecker
+└── session/            # Session management files (auto-generated)
+```
 
-- 'q' closes a window wherever it is "reasonable", i.e. that there is no need to record a macro
-  (ex. re-naming window buffer, message window buffer, etc.)
-- WhichKey is installed, and the keyboard shortcuts come labeled. It is set to a delay of
-  1.5s so that there isn't an annoying pop-up that shows up every-time you hesitate.
-- \<esc\> will also close any notification pop-ups and un-highlight search items.
+## ⌨️ Key Concepts
 
-The files for the nvim configuration is organized like thus:
+### Leader Keys
+- `\` - **Main Leader**: Actions and commands
+- `<Space>` - **Navigation Leader**: Search, find, and navigation
+- `,` - **Local Leader**: Filetype-specific actions (LaTeX, Markdown, debugging, etc.)
 
+### Core Principles
+- `q` closes windows where macro recording isn't needed
+- `<Esc>` dismisses notifications and clears search highlighting
+- WhichKey provides contextual help with 1.5s delay
+- `;` is remapped to `:`.
+- Extensive use of toggle mappings via ``[/]`` and ``']o'/']o'`` for quick option changes
 
-nvim
-- lua
-  - configs  : has plugin configuration
-  - plugins  : has plugin installation and all lazy info (including key-mappings and commands)
-  - settings : has custom keymappings, autocommands, toggles, fault-management, etc.
-  - sources  : custom cmp sources
-  - utils    : any utility/helper file goes here
-- luasnip   : luasnip snippets goes here (they are lua snippets, not vscode or snipmate snippets)
-- preamble  : custom chunks for quickly constructing latex preambles
-- session   : auto-generated to quickly "recover" current session (see alpha configuration)
-- spell     : additional correctly spelled words for the spellchecker/lsp to ignore (read vim manual)
+## 📊 Statusline Features
 
-## statusline
-The statusline contains lots of useful information.
-- lsp: which one is active (colour coded)
-- git: which branch your on, with changes
-- compiling: if on TeX file, status and progress of compilation
-- name of file (optional: path from project root)
-- whether or not registering macro, "q\<key\>"
-- size of latex document (if applicable)
-- compilation status of a latex document
-- debuging information (when applicable).
+The statusline displays comprehensive information:
+- **LSP Status**: Active language server with color coding
+- **Git Integration**: Current branch and change indicators
+- **LaTeX Compilation**: Document size and compilation progress/status
+- **File Information**: Name and optional path from project root
+- **Macro Recording**: Shows `q<key>` when recording
+- **Debug Information**: Active debugging session details
 
-## keyboard shortcuts
+## ⌨️ Keyboard Shortcuts
 
-The leader key is ''`\`''. The leader key representing doing an __action__ :
-| Keymap   | \<leader\>...                  |
-| -------- | -----------------------------  |
-| r        | refactor                       |
-| R        | Run                            |
-| b        | box text                       |
-| d        | debug                          |
-| o        | obsidian                       |
-| f        | format                         |
-| h        | hunk                           |
-| S        | Spotify Actions                |
-| s        | camelCase/snake_case converter |
-| t        | toggle a window                |
+### Main Leader (`\`) - Actions
+| Key | Action |
+|-----|--------|
+| `r` | Refactor code |
+| `R` | Run/execute |
+| `b` | Box text formatting |
+| `d` | Debug operations |
+| `o` | Obsidian integration |
+| `f` | Format code |
+| `h` | Git hunk operations |
+| `S` | Spotify controls |
+| `s` | Case conversion (camelCase/snake_case) |
+| `t` | Toggle windows |
 
+### Navigation/Pairs (`[` and `]`)
+| Key | Action |
+|-----|--------|
+| `s` | Previous/next misspelled word |
+| `b` | Previous/next buffer |
+| `d` | Previous/next diagnostic |
+| `e` | Swap lines up/down |
+| `<Space>` | Add blank line above/below |
+| `h` | Previous/next git hunk |
+| `j` | Join/unjoin lines |
+| `m`/`M` | Method start/end |
+| `[`/`]` | Block or heading navigation |
+| `t` | Previous/next TODO comment |
+| `z` | Previous/next fold |
 
+### Option Toggles (`[o`/`]o`)
+| Key | Toggle |
+|-----|--------|
+| `a` | Auto-chdir |
+| `b` | Light/dark background |
+| `B` | Code block visualization |
+| `c` | Cursorline |
+| `d` | Diff mode |
+| `h` | Search highlighting |
+| `I` | Illuminate plugin |
+| `i` | Ignore case |
+| `l` | Show trailing characters |
+| `L` | LSP start/stop |
+| `s` | Spell checking |
+| `S` | Scroll binding |
+| `T` | Tree-sitter |
+| `u` | Cursor column |
+| `v` | Virtual edit |
+| `w` | Line wrapping |
+| `W` | Window animations |
+| `x` | Cursor crosshair |
 
-The local leader is `,`. This is reserved for extra actions in that are exposed in certain filetypes only.
-Files/plugins that use local-leader are:
-- norg
-- latex
-- iron (many programming setups have certain run configurations)
-- debugging
+### Window Management (`<C-w>`)
+| Key | Action |
+|-----|--------|
+| `<C-g>` | LazyGit |
+| `<C-o>` | Oil file manager |
+| `<C-r>` | Multi-replace |
+| `<C-s>` | Spectre search/replace |
+| `<C-t>` | Translation |
+| `<C-u>` | Undo tree |
+| `<C-m>` | Mason package manager |
+| `<C-l>` | LSP info |
+| `d` | Debug UI |
+| `h` | Harpoon |
+| `o` | Outline/symbols |
+| `l` | Lazy plugin manager |
+| `t` | Terminal toggle |
+| `e` | File explorer toggle |
 
-The `[` and `]` keys are for different actions that come in pairs:
+### Navigation Leader (`<Space>`) - Search & Find
+| Key | Action |
+|-----|--------|
+| `/` | Fuzzy search in current file |
+| `<Space>` | Browse current directory |
+| `C` | Select colorscheme |
+| `P` | Plugin management |
+| `q` | Quickfix list (Trouble) |
+| `r` | Resume last Telescope search |
+| `T` | Terminal selector |
+| `t` | Table of contents |
+| `d` | Diagnostics menu |
+| `D` | Debug menu |
+| `e` | Editor files |
+| `g` | Grep/search |
+| `l` | LSP menu |
+| `w` | Wiki/notes |
+| `f` | Find submenu |
+| `c` | Config submenu |
 
-| Keymap    | prev/next...               |
-|-----------|----------------------------|
-| s         | miss-spelled word          |
-| b         | tab                        |
-| d         | diagnostic                 |
-| e         | swap with prev/next line   |
-| \<sapce\> | add blankline above/bellow |
-| h         | toggle hunk                |
-| j         | join/unjoin lines of code  |
-| m         | method start               |
-| \[/\]     | next "block" or "heading"  |
-| M         | method end                 |
-| p         | pwd in lualine             |
-| t         | todo comment               |
-| z         | folds                      |
+### Find Submenu (`<Space>f`)
+| Key | Action |
+|-----|--------|
+| `B` | Bookmarks |
+| `b` | Open buffers |
+| `c` | Available commands |
+| `f` | Files in current directory |
+| `G` | Git changes |
+| `h` | Help documentation |
+| `k` | Keymaps |
+| `m` | Marks |
+| `n` | Notifications |
+| `o` | Recent files |
+| `p` | Project files |
+| `t` | TODO comments |
+| `u` | Undo history |
 
-There is a special toggle which is under `o` (`[o / ]o`) which mostly toggles *options*
-(hence the `o`), however it may toggle other things like LSP. A toggle is usually placed
-under \[o or \]o if it doesn't move anything on the screen (though it may add virtual text
-or column-text for visual enhancement) or doesn't edit the file (hence, \[h/\]h doesn't
-have an o in front of it, while \[oL/\]oL does)
+### Config Submenu (`<Space>c`)
+| Key | Action |
+|-----|--------|
+| `c` | Neovim config files |
+| `C` | All config files |
+| `f` | Ftplugin files |
+| `p` | Plugin configurations |
+| `P` | LaTeX preambles |
+| `s` | Snippets |
 
-| Keymap | `[o`=on, `]o`=off       |
-|--------|-------------------------|
-| s      | miss-spelled word       |
-| a      | auto-chdir              |
-| b      | light background        |
-| B      | visualize code-blocks   |
-| c      | cursorline              |
-| d      | diff this               |
-| h      | hlsearch                |
-| I      | Illuminate plugin       |
-| i      | ignore case             |
-| l      | see trailing characters |
-| L      | Lsp start               |
-| s      | spell                   |
-| S      | scrollbind              |
-| T      | treesitter enable       |
-| u      | cursor column           |
-| v      | virtual edit            |
-| w      | wrap                    |
-| W      | animated window         |
-| x      | x on cursor             |
-| N      | center n/N              |
+### Other Important Bindings
+| Key | Action | Mode |
+|-----|--------|------|
+| `\|` | Temporary vertical split | Normal |
+| `+` | Edit in new tab | Normal |
+| `_` | Temporary horizontal split | Normal |
+| `J`/`K` | Move up/down keeping cursor position | Normal |
+| `L` | LSP hover | Normal |
+| `;` | Command mode (`:`) | Normal |
+| `U` | Redo | Normal |
+| `<C-t>` | Buffer file stack navigation | Normal |
+| `<C-s>` | Show file in tree | Normal |
+| `<C-/>` | Toggle comment | Normal |
+| `<C-;>` | Open terminal | Normal |
+| `>>`/`<<` | Move function parameters | Normal |
+| `<C-l>` | Auto-fix spelling | Insert |
+| `T` | Tabularize selection | Visual |
+| `c` | Search/replace selection | Visual |
 
-There are many different pop-up windows that are available to show more information or to
-perform more granular actions. All pop-ups are accessible through the \<c-w\> key.
+## 🔌 Key Plugins
 
-| Keymap   | \<c-w\>...                    |
-| -------- | ----------------------------- |
-| \<c-g\>  | Lazy Git                      |
-| \<c-o\>  | oil mode                      |
-| \<c-r\>  | Murren Replace                |
-| \<c-s\>  | Spectre Replace               |
-| \<c-t\>  | Transalte                     |
-| \<c-u\>  | undo tree                     |
-| \<c-m\>  | mason                         |
-| \<c-l\>  | lspInfo                       |
-| d        | debug ui                      |
-| h        | harpoon                       |
-| o        | outline                       |
-| l        | Lazy plugin manager...        |
-| t        | terminal toggle               |
-| e        | filer explorer toggle         |
+### Core Functionality
+- **[Lazy.nvim](https://github.com/folke/lazy.nvim)**: Plugin manager with lazy loading
+- **[Telescope](https://github.com/nvim-telescope/telescope.nvim)**: Fuzzy finder and search interface
+- **[WhichKey](https://github.com/folke/which-key.nvim)**: Contextual keybinding help
+- **[LuaSnip](https://github.com/L3MON4D3/LuaSnip)**: Snippet engine with custom Lua snippets
 
+### Language Support
+- **[nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)**: Language Server Protocol integration
+- **[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)**: Syntax highlighting and parsing
+- **[VimTeX](https://github.com/lervag/vimtex)**: Comprehensive LaTeX support
+- **[nvim-cmp](https://github.com/hrsh7th/nvim-cmp)** / **[blink.cmp](https://github.com/saghen/blink.cmp)**: Auto-completion engines
 
-The ''navigation''/''picker'' is hidden behind the "Navigation leader key" which
-is: `<space>`, and most of it is done via Telescope/snacks, however there are times when other
-plugins do a better job for a specific task (ex. quickfix is dealt by Trouble):
+### UI & Visual Enhancements
+- **[Heirline](https://github.com/rebelot/heirline.nvim)**: Custom statusline configuration
+- **[Alpha](https://github.com/goolord/alpha-nvim)**: Customizable start screen
+- **[Neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim)**: File explorer sidebar
+- **[Noice](https://github.com/folke/noice.nvim)**: Enhanced UI for messages and notifications
 
-| Keymap    | \[=on, \]=off                 |
-| --------  | ----------------------------- |
-| /         | fuzzy search current file     |
-| \<space\> | Browse current dir            |
-| C         | Colorschemes                  |
-| P         | Downlaod Plugins              |
-| q         | quixfix (using trouble)       |
-| r         | resume last Telescope search  |
-| T         | select terminal               |
-| t         | table of contents (ToC)       |
-| d         | diagnostics...                |
-| D         | Debug...                      |
-| e         | editor files...               |
-| g         | grep...                       |
-| l         | lsp...                        |
-| w         | wiki...                       |
-| f         | find...                       |
-| c         | config...                     |
+### Development Tools
+- **[nvim-dap](https://github.com/mfussenegger/nvim-dap)**: Debug Adapter Protocol integration
+- **[Gitsigns](https://github.com/lewis6991/gitsigns.nvim)**: Git integration with line-level changes
+- **[LazyGit](https://github.com/kdheepak/lazygit.nvim)**: Terminal-based Git UI
+- **[Trouble](https://github.com/folke/trouble.nvim)**: Enhanced diagnostics and quickfix list
 
+### Writing & Productivity
+- **[Obsidian](https://github.com/epwalsh/obsidian.nvim)**: Note-taking and knowledge management
+- **[Neorg](https://github.com/nvim-neorg/neorg)**: Organized note-taking and task management
+- **[Comment](https://github.com/numToStr/Comment.nvim)**: Smart code commenting
+- **[Flash](https://github.com/folke/flash.nvim)**: Enhanced navigation and jumping (optional, disabled by default)
 
-The \<space\>f  and \<space\>c are a  bit special. The \<sapce\>f  hides most telescope pickers that aren't mapped to
-a particular key:
+## 🚀 Installation
 
-| Keymap | description                    |
-|--------|--------------------------------|
-| B      | Bookmarks                      |
-| b      | buffer                         |
-| c      | commands                       |
-| f      | files in cwd                   |
-| G      | git changes                    |
-| h      | help                           |
-| k      | keymaps                        |
-| m      | marks                          |
-| n      | notifications                  |
-| o      | old files                      |
-| p      | project files (looks for .git) |
-| t      | todos                          |
-| u      | undo                           |
-| d      | documents...                   |
+### Prerequisites
+- **Neovim 0.10+** (latest stable recommended)
+- **Git** for plugin management
+- **Node.js** for LSP servers and tools
+- **Python 3** with `pynvim` for Python integration
+- **LaTeX distribution** (for LaTeX support)
+- **Ripgrep** for faster searching
+- **A Nerd Font** for icon support
 
-The `<space>fd` hides some more granular document searching. The `<space>c` has the following
-options:
-| Keymap | description                |
-|--------|----------------------------|
-| c      | nvimconfig files           |
-| C      | all config files           |
-| s      | settings                   |
-| f      | ftplugins                  |
-| p      | plugin setup (lazy config) |
-| P      | Preambles                  |
-| s      | snippets                   |
+### Quick Start
+1. **Backup your existing config** (if any):
+   ```bash
+   mv ~/.config/nvim ~/.config/nvim.backup
+   ```
 
+2. **Clone this configuration**:
+   ```bash
+   git clone <your-repo-url> ~/.config/nvim
+   ```
 
-Other important custom keybindings are:
+3. **Launch Neovim**:
+   ```bash
+   nvim
+   ```
 
-| Keymap    | description                    | mode |
-| --------- | -------------------------------| ---- |
-| \|        |  create tmp vsplit             |  n   |
-| +         | tab edit                       |  n   |
-| _         | tmp horizontal split           |  n   |
-| J         | keep cursor same position j    |  n   |
-| K         | keep cursor same position k    |  n   |
-| L         | vim.lsp.hover()                |  n   |
-| ;         | remaps to :                    |  n   |
-| U         | remaps to \<c-r\>              |  n   |
-| \<c-r\>   | remaps to U                    |  n   |
-| \<c-t\>   | buffer file call-stack         |  n   |
-| \<c-s\>   | show file in neotree           |  n   |
-| \<c-\/\>  | comment                        |  n   |
-| \<c-;\>   | open terminal                  |  n   |
-| \>\>/\<\< | Move Paramaters around         |  n   |
-| \<c-l\>   | auto-spelling fix              |  i   |
-| \<c-=\>   | \<c-r\>=                       |  i   |
-| T         | Tabluarize with key \[input\]  |  v   |
-| c         | search/replace selected        |  v   |
+4. **Install plugins**: Lazy.nvim will automatically install all plugins on first launch.
 
-Note that \<c-t\> replaces the default behavior of vim which jumps to previous tag. With
-the advancements of LSP's, combo-ed with \<c-o\>, I found I never used \<c-t\>, and thus
-have "upgraded" it to something more useful, which is a way to navigate to most recent
-files opened in the current buffer.
+5. **Install LSP servers**: Use `:Mason` to install language servers for your languages.
+
+### Post-Installation
+- Review `lua/settings/options.lua` for personal preferences
+- Customize colorschemes in `lua/plugins/colorschemes.lua`
+- Add personal snippets to the `LuaSnip/` directory
+- Configure LSP servers in `lua/configs/lsp.lua`
+
+## ⚙️ Customization
+
+### File-type Specific Features
+- **LaTeX**: Custom snippets, compilation shortcuts, and preamble templates
+- **Markdown**: Enhanced editing with live preview and table formatting
+- **Python**: REPL integration with Iron.nvim and debugging setup
+- **TypeScript/React**: Completion and refactoring tools
+
+### Custom Sources & Utilities
+- **Custom CMP Sources**: Located in `lua/sources/`
+- **Helper Functions**: Utility functions in `lua/utils/`
+- **LaTeX Preambles**: Template chunks in `preamble/`
+- **Spell Checking**: Custom dictionary words in `spell/`
+
+##  Local Leader Mappings
+
+The local leader (`,`) provides filetype-specific functionality:
+
+### LaTeX (`,`)
+- Compilation and viewing commands
+- Citation and reference tools
+- Custom environment insertion
+
+### Markdown (`,`)
+- Table formatting and navigation
+- Preview and export options
+- Link management
+
+### Debugging (`,`)
+- Breakpoint management
+- Step execution controls
+- Variable inspection
+
+### Neorg (`,`)
+- Task management
+- Journal entries
+- Note linking and organization
+
+## 🎯 Philosophy
+
+This configuration prioritizes:
+- **Efficiency**: Minimal keystrokes for common operations
+- **Consistency**: Logical keybinding patterns across contexts
+- **Performance**: Fast startup and responsive editing
+- **Academic Workflow**: Strong support for LaTeX and research writing
+- **Extensibility**: Easy customization and plugin integration
+
+## 📚 Learning Resources
+
+- **WhichKey Help**: Press any leader key and wait 1.5s for contextual help
+- **Telescope Commands**: `<Space>fk` to browse all keymaps
+- **Plugin Documentation**: `:help <plugin-name>` for specific plugins
+
+## ⚠️ Requirements & Assumptions
+
+This configuration assumes familiarity with:
+- Vim/Neovim concepts (modes, buffers, windows, tabs)
+- Basic Lua scripting
+- Command-line tools and development workflows
+- LaTeX for academic writing features
+
+**Note**: This is a personal configuration optimized for specific workflows. While comprehensive, it may require customization for your specific needs.

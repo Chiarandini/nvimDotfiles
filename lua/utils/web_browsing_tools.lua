@@ -30,12 +30,12 @@ local browser_class = "brave"
 -- Function to open URL in a web browser
 local function open_in_browser(url)
 	-- Open the URL using xdg-open
-	vim.fn.jobstart({ "xdg-open", url }, { detach = true })
+	vim.fn.jobstart({ "open", url }, { detach = true })
 
 	-- Optionally bring the browser to focus after a short delay
-	vim.defer_fn(function()
-		vim.fn.jobstart({ "wmctrl", "-a", browser_class }, { detach = true })
-	end, 1500)
+	-- vim.defer_fn(function()
+	-- 	vim.fn.jobstart({ "wmctrl", "-a", browser_class }, { detach = true })
+	-- end, 1500)
 end
 
 -- Web Search: Perform a search using an external browser
