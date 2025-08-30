@@ -95,7 +95,8 @@ return {
 	--  delete extra white space
 	{
 		"mcauley-penney/tidy.nvim",
-		event = "BufWritePre",
+		event = 'VeryLazy',
+		-- event = "BufWritePre",
 		config = function()
 			vim.keymap.set("n", "<leader>te", require("tidy").toggle, { desc = "tidy toggle" })
 			require("configs.tidy")

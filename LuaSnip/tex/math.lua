@@ -252,7 +252,16 @@ return
 			show_condition = tex_utils.in_mathzone,
 		}
 	),
-	-- supseteq
+	-- supbseteq
+	s(
+		{ trig = 'SS', regTrig=true, wordTrig=false, dscr = "superset" },
+		{t '\\supseteq'},
+		{
+			condition = tex_utils.in_mathzone,
+			show_condition = tex_utils.in_mathzone,
+		}
+	),
+	-- composition
 	s(
 		{ trig = '([%s%a%(%)%[%]%{%}%$])CC', regTrig=true, wordTrig=false, dscr = "composition (circ)" },
 		{t '\\circ'},

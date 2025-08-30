@@ -52,6 +52,7 @@
   "glance.nvim": { "branch": "master", "commit": "bf86d8b79dce808e65fdb6e9269d0b4ed6d2eefc" },
   "golf": { "branch": "main", "commit": "abf1bc0c1c4a5482b4a4b36b950b49aaa0f39e69" },
   "grug-far.nvim": { "branch": "main", "commit": "482517700eef8579b289a20995f017a0775a6ec4" },
+  "gruvbox.nvim": { "branch": "main", "commit": "58a2cda2e953a99e2f87c12b7fb4602da4e0709c" },
   "gx-extended.vim": { "branch": "master", "commit": "6a338c93449ad972d0148396cefbc95ccbe6c653" },
   "hardtime.nvim": { "branch": "main", "commit": "6d7664d5bdfaea44c5f50b29f5239fab7b00c273" },
   "harpoon": { "branch": "harpoon2", "commit": "ed1f853847ffd04b2b61c314865665e1dadf22c7" },

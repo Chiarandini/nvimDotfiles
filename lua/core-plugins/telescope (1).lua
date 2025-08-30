@@ -91,7 +91,6 @@ local stackOptions = { -- layout information in config
 	ignore_current_buffer = true,
 }
 
-
 return {
 
 	-- ISSUE: breaks :Telescope headings (original use: for faster file navigation)
@@ -113,19 +112,12 @@ return {
 			require("browser_bookmarks").setup()
 		end,
 	},
-	{
-		"TelescopeTools.nvim",
-		event = "VeryLazy",
-		dev = true,
-		config = function()
-			require('configs.TelescopeTools')
-		end
-	},
 
 	{
 		"nvim-telescope/telescope.nvim",
 		version = false,
 		dependencies = {
+			{ "TelescopeTools.nvim"},
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-lua/popup.nvim" },               -- for better pop-up integration
 			{ "debugloop/telescope-undo.nvim" },     -- see undo tree in telescope
@@ -279,17 +271,6 @@ return {
 					require("telescope.builtin").live_grep({
 						search_dirs = { "~/.config/nvim/" },
 						prompt_title = "grep all config",
-					})
-				end,
-				desc = "[g]rep [c]onfiguration",
-			},
-			-- find [g]rep all neovim config
-			{
-				"<space>go",
-				function()
-					require("telescope.builtin").live_grep({
-						search_dirs = { "~/Documents/NateObsidianVault/" },
-						prompt_title = "grep obsidian",
 					})
 				end,
 				desc = "[g]rep [c]onfiguration",
@@ -538,14 +519,12 @@ return {
 
 			-- document in books
 			-- { '<space>db', function() require('telescope.builtin').find_files({cwd = "/Users/nathanaelchwojko-srawkey/Documents/books/"}) end , desc = '[d]ocument [b]ooks'},
-
 			-- document in books
-			-- {
-			-- 	"<space>fdb",
-			-- 	function() telescope_open_execute('/Users/nathanaelchwojko-srawkey/Documents/books/') end,
-			-- 	desc = "[d]ocument [b]ooks",
-			-- },
-
+			{
+				"<space>fdb",
+				function() telescope_open_execute('/Users/nathanaelchwojko-srawkey/Documents/books/') end,
+				desc = "[d]ocument [b]ooks",
+			},
 			-- document with [e]YNTKA
 			-- vim.keymap.set('n', '<space>de', function() builtin.find_files({cwd = "/Users/nathanaelchwojko-srawkey/Documents/University/", prefilter_sorter="EYNTKA"}) end , {})
 			--  ╔═════════════════════════════════════════════════════════╗

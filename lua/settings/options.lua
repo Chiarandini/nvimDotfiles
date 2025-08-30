@@ -124,8 +124,6 @@ opt.autowriteall = true
 -- ISSUE: is buggy
 -- opt.cmdheight = 0
 
-
-
 -- default want to conceal as much as possible
 vim.o.conceallevel = 2
 -- for latex, what to conceal

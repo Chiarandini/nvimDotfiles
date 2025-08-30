@@ -1050,7 +1050,10 @@ local GitBlock = {
 -- {{
 local DAPMessages = {
   condition = function()
-    if require("lazy.core.config").plugins["nvim-dap"]._.loaded then
+    local plugins = require("lazy.core.config").plugins
+    local nvim_dap_plugin = plugins["nvim-dap"]
+
+    if nvim_dap_plugin and nvim_dap_plugin._.loaded then
       local session = require("dap").session()
       return session ~= nil
     end

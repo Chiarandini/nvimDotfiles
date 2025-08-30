@@ -227,6 +227,7 @@ vim.keymap.set("n", "<leader>onm", function() obsidianTools.create_obsidian_note
 vim.keymap.set("n", "<leader>onp", function() obsidianTools.create_obsidian_note('philosophyVault') end, { desc = "Create Obsidian Note" })
 -- vim.keymap.set("n", "<leader>ol", obsidianTools.create_obsidian_note_with_link, { desc = "Save a link to obsidian" })
 vim.keymap.set("n", "<leader>ot", obsidianTools.addTags, { desc = "add tags" })
+vim.keymap.set("n", "<space>oo", "<cmd>Obsidian search<cr>", { desc = "[o]bsidian search" })
 vim.keymap.set("n", "<space>ot", "<cmd>Obsidian tags<cr>", { desc = "[o]bsidian [t]ags" })
 vim.keymap.set("n", "<leader>oT", function() obsidianTools.addTagsFromList(obsidianTools.tagList) end, { desc = "add tags to list" })
 

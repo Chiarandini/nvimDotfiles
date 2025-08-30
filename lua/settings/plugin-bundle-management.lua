@@ -7,6 +7,9 @@ table.insert(Plugin_bundle, {import = "plugins.keyboardMode"})
 table.insert(Plugin_bundle, {import = "plugins.obsidian"})
 table.insert(Plugin_bundle, {import = "plugins.websiteTools"})
 table.insert(Plugin_bundle, {import = "plugins.git_extras"})
-table.insert(Plugin_bundle, {import = "plugins.games"})
+table.insert(Plugin_bundle, {import = "plugins.telescope_extras"})
+table.insert(Plugin_bundle, {import = "plugins.translation"})
+table.insert(Plugin_bundle, {import = "plugins.bloat_analysis"})
+-- table.insert(Plugin_bundle, {import = "plugins.games"})
 
 return Plugin_bundle

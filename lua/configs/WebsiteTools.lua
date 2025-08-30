@@ -91,6 +91,11 @@ vim.api.nvim_create_user_command("CopyBookToWebsite", function()
 	websiteTools.copyBooksToWebsite()
 end, {})
 
+vim.api.nvim_create_user_command("CopyNotesToWebsite", function()
+	websiteTools.copyNotesToWebsite()
+end, {})
+
+
 vim.api.nvim_create_user_command("CopyBlogToWebsite", function()
 	websiteTools.copyBlogToWebsite()
 end, {})

@@ -276,6 +276,7 @@ return {
 				Snacks.scratch()
 			end,
 			desc = "Toggle Scratch Buffer",
+			mode = {'n', 'i', 't'}
 		},
 		{
 			"<space><c-b>",
@@ -368,14 +369,14 @@ return {
 			end,
 			desc = "[O]bsidian [M]ath",
 		},
-		{
-			-- obsidian, math
-			"<space>oo",
-			function()
-				Snacks.picker.files({ cwd = "~//Documents/NateObsidianVault/" })
-			end,
-			desc = "[O]bsidian (everything)",
-		},
+		-- {
+			-- obsidian, math (obsidian serach does more)
+			-- "<space>oo",
+			-- function()
+			-- 	Snacks.picker.files({ cwd = "~//Documents/NateObsidianVault/" })
+			-- end,
+			-- desc = "[O]bsidian (everything)",
+		-- },
 		{
 			"<space>m",
 			move_file_oil,

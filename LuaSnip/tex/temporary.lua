@@ -21,9 +21,19 @@ return
 
 },
 {
-	s({trig = 'LFH', snippetType = 'autosnippet', name='let the following homotopy'},
+	s({trig = 'HRR', snippetType = 'autosnippet', name='Hirzebruch Riemann Roch'},
 		{
-			t({ [[Let $f_t: D^2 \to M^3$ be an immersed homotopy to a simply connected smooth $3$-manifold $M^3$ where $f_0$ and $f_1$ are embeddings.]] })
+			t({ [[Hirzebruch Riemann Roch]] })
 		}
-	)
+	),
+	s({trig = 'GRR', snippetType = 'autosnippet', name='Grothendieck Riemann Roch'},
+		{
+			t({ [[Grothendieck Riemann Roch]] })
+		}
+	),
+	-- s({trig = 'LFH', snippetType = 'autosnippet', name='let the following homotopy'},
+	-- 	{
+	-- 		t({ [[Let $f_t: D^2 \to M^3$ be an immersed homotopy to a simply connected smooth $3$-manifold $M^3$ where $f_0$ and $f_1$ are embeddings.]] })
+	-- 	}
+	-- )
 }
