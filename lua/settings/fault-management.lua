@@ -25,8 +25,15 @@ vim.keymap.set("n", "K", "gk<c-y>")
 
 vim.keymap.set("n", ";", ":", { desc = "you'd be surprised how powerful this is" })
 
---NOTE: trying this out, may hate it, may love it
-vim.keymap.set("n", "?", "/", { desc = "so that n/N is always consistent" })
+-- NOTE: trying this out, may hate it, may love it
+vim.keymap.set('n', 'n',
+  function() return vim.v.searchforward == 1 and 'n' or 'N' end,
+  { expr = true, silent = true, desc = "Search forward" }
+)
+vim.keymap.set('n', 'N',
+  function() return vim.v.searchforward == 1 and 'N' or 'n' end,
+  { expr = true, silent = true, desc = "Search backward" }
+)
 
 -- I would love for this to be the case, but I think I shouldn't deviate too far from
 -- defaults.
