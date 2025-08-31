@@ -1,4 +1,4 @@
-require("neo-tree").setup({
+require("plugins.neo-tree").setup({
 	sources = { "filesystem", "diagnostics", "git_status" },
 	source_selector = {
 		winbar = true,

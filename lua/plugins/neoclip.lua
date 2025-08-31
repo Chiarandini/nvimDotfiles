@@ -1,4 +1,5 @@
-require('neoclip').setup({
+local config = function()
+	require('neoclip').setup({
   history = 1000,
   enable_persistent_history = false,
   length_limit = 1048576,
@@ -52,3 +53,17 @@ require('neoclip').setup({
 	},
   },
 })
+end
+
+
+-- for clipboard history (press <c-s-v> in insert mode)
+return {
+	"AckslD/nvim-neoclip.lua",
+	dependencies = {
+		{ "kkharji/sqlite.lua", module = "sqlite" },
+		-- you'll need at least one of these
+		{ "nvim-telescope/telescope.nvim" },
+	},
+	lazy = true,
+	config = config,
+}

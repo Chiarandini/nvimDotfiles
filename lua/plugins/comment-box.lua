@@ -6,3 +6,9 @@ keymap({"n", "v"}, "<Leader>bb", "<cmd>CBalbox7<cr>")
 
 -- centered line
 keymap("n", "<Leader>bl", "<cmd>CBcline<cr>")
+
+-- put nice boxes around comment
+return{ "LudoPinelli/comment-box.nvim",
+event = 'VeryLazy',
+config = true,
+}

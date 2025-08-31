@@ -20,7 +20,7 @@ require("code_runner").setup({
 })
 
 vim.keymap.set("n", "<leader>RT", function()
-	require("betterTerm").send(
+	require("plugins.betterTerm").send(
 		require("code_runner.commands").get_filetype_command(),
 		1,
 		{ clean = false, interrupt = true }
