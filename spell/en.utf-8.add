@@ -354,7 +354,7 @@ nilradical
 nilpotent
 generization
 galois
-Grothendeick
+#rothendeick
 Gluability
 solvability
 quintic
@@ -843,3 +843,6 @@ complexifying
 orbifold
 orbifolds
 obifold/!
+Grothendeick/!
+complexify
+filterings

@@ -240,7 +240,9 @@
 
 % mathcal
 % \newcommand{\co}{{\mathfrak{o}}} %mathcal{o} looks like wreath product, so I changed it to mathfrak
+\newcommand{\cc}{{\mathpzc{c}}}
 \newcommand{\co}{{\mathpzc{o}}}
+\newcommand{\cp}{{\mathpzc{p}}}
 \newcommand{\CA}{{\mathcal{A}}}
 \newcommand{\CB}{{\mathcal{B}}}
 \newcommand{\CC}{{\mathcal{C}}}
@@ -384,7 +386,6 @@
 \newcommand{\Ann}{{\operatorname{Ann}}}
 \newcommand{\Aut}{{\operatorname{Aut}}}
 \newcommand{\Der}{{\operatorname{Der}}}
-\newcommand{\Div}{{\operatorname{Div}}}
 \newcommand{\Emb}{{\operatorname{Emb}}}
 \newcommand{\End}{{\operatorname{End}}}
 \newcommand{\Ext}{{\operatorname{Ext}}}
@@ -406,6 +407,8 @@
 \newcommand{\Syl}{{\operatorname{Syl}}}
 \newcommand{\Sym}{{\operatorname{Sym}}}
 \newcommand{\Tor}{{\operatorname{Tor}}}
+\newcommand{\Div}{{\operatorname{Div}}}
+\newcommand{\PDiv}{{\operatorname{PDiv}}}
 
 \newcommand{\Char}{{\operatorname{char}}}
 \newcommand{\Frac}{{\operatorname{Frac}}}
@@ -421,6 +424,7 @@
 \newcommand{\fHom}[1]{\operatorname{Hom}(#1, --)}
 
 \newcommand{\mSpec}{{\operatorname{mSpec}}}
+\newcommand{\Grass}{{\operatorname{Grass}}}
 
 
 % connectors
@@ -634,39 +638,34 @@ overlay last={\draw[colexam,line width=.5pt] ([xshift=-0pt]frame.north west) -- 
 
 
 
-\def\prooftext{Proof} % If English
-\NewDocumentEnvironment{Proof}{ O{} }
-{
-    \colorlet{colexam}{black!55!black} % Global example color
-    \newtcolorbox[number within=section]{testproofbox}{%
-        empty,% Empty previously set parameters
-        title={\emph{\prooftext} \thetcbcounter: #1},
-        attach boxed title to top left,
-        minipage boxed title,
-        boxed title style={empty,size=minimal,toprule=0pt,top=4pt,left=3mm,overlay={}},
-        coltitle=colexam,
-        fonttitle=\bfseries,
-        before=\par\medskip\noindent,
-        parbox=false,
-        boxsep=0pt,
-        left=3mm,
-        right=0mm,
-        top=2pt,
-        breakable,
-        pad at break=0mm,
-        before upper=\csname @totalleftmargin\endcsname0pt,
-        % Removed height constraints
-        % Added flexible width
-        width=\dimexpr\textwidth-3mm\relax,
-        % Modified overlays
-        overlay unbroken={\draw[colexam,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
-        overlay first={\draw[colexam,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
-        overlay middle={\draw[colexam,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },
-        overlay last={\draw[colexam,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },%
-    }
-    \begin{testproofbox}
+\newtcolorbox{ProofTcb}[1][]{%
+    empty,
+    title={\emph{Proof}: #1},
+    attach boxed title to top left,
+    minipage boxed title,
+    boxed title style={empty,size=minimal,toprule=0pt,top=4pt,left=3mm,overlay={}},
+    coltitle=black!55!black,
+    fonttitle=\bfseries,
+    before=\par\medskip\noindent,
+    parbox=false,
+    boxsep=0pt,
+    left=3mm,
+    right=0mm,
+    top=2pt,
+    breakable,
+    pad at break=0mm,
+    before upper=\csname @totalleftmargin\endcsname0pt,
+    width=\dimexpr\textwidth-3mm\relax,
+    overlay unbroken={\draw[black!55!black,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    overlay first={\draw[black!55!black,line width=.5pt] ([xshift=-0pt]title.north west) -- ([xshift=-0pt]frame.south west); },
+    overlay middle={\draw[black!55!black,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },
+    overlay last={\draw[black!55!black,line width=.5pt] ([xshift=-0pt]frame.north west) -- ([xshift=-0pt]frame.south west); },
+    #1
 }
-{\end{testproofbox}\endlist}
+
+\newenvironment{Proof}[1][]
+  {\begin{ProofTcb}[#1]}
+  {\end{ProofTcb}}
 
 
 %  ╔══════════════════════════════════════════════════════════╗
